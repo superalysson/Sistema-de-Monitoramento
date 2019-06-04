@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block corpo %}
+<h1 class="h3 mb-0 text-gray-800"><strong>Adiciona Acesso Visitante </strong></h1>
+<form action="" method="post">
+  {% csrf_token %}
+   <div class="form-group">
+    <label >Nome do Visitante:   </label><a href="/adicionaCadastroVisitante/" title="Adiciona Novo Visitante"><i class="fas fa-user-plus"></i></a>
+    {{ form.nomeVisitante|add_class:"form-control" }}
+
+    </div>
+
+    <div class="form-group">
+    <label >Data da Entrada:</label>
+    {{ form.dataEntrada|add_class:"form-control" }}
+
+    </div>
+
+     <div class="form-group">
+    <label >Horário da Entrada:</label>
+    {{ form.horaEntrada|add_class:"form-control" }}
+
+    </div>
+
+     <div class="form-group">
+    <label >Data da saída:</label>
+    {{ form.dataSaida|add_class:"form-control" }}
+
+    </div>
+
+     <div class="form-group">
+    <label >Horário da saída:</label>
+    {{ form.horaSaida|add_class:"form-control" }}
+
+    </div>
+
+    <script>
+        $('#id_dataEntrada').datepicker({
+            datepicker: { showOtherMonths: true },
+            modal: true,
+            footer: true
+        });
+        $('#id_horaEntrada').timepicker();
+        $('#id_dataSaida').datepicker({
+            datepicker: { showOtherMonths: true },
+            modal: true,
+            footer: true
+        });
+        $('#id_horaSaida').timepicker();
+
+    </script>
+
+  <a href="javascript:history.go(-1)" class="btn btn-danger">Cancelar</a>
+    <button type="reset"  class="btn btn-primary">Limpar</button>
+  <button type="submit" class="btn btn-success">Adicionar</button>
+</form>
+{% endblock %}

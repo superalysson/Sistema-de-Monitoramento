@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block corpo %}
+<h1 class="h3 mb-0 text-gray-800"><strong>Lista do Diário de ações </strong></h1>
+<br><br>
+<table align="center" class="table table-striped">
+    <tr>
+      <td><b style="font-size:16px">Nome do autor</b></td>
+      <td><b style="font-size:16px">Data da Entrada</b></td>
+      <td><b style="font-size:16px">Mensagem</b></td>
+      <td><b style="font-size:16px"></b></td>
+    </tr>
+
+    {% for itemDiario in listaDiario_itens%}
+    <tr>
+        <td>{{itemDiario.autorDiario}}</td>
+        <td>{{itemDiario.dataEntrada}}</td>
+        <td>{{itemDiario.mensagem}}</td>
+        <td><a class="btn btn-primary btn-sm" type="button" href="/atualizaDiario/{{ itemDiario.id }}">Editar</a></td>
+
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

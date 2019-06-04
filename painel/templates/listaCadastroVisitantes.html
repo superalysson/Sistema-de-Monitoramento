@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block corpo %}
+<h1 class="h3 mb-0 text-gray-800"><strong>Lista dos Visitantes Cadastrados </strong></h1>
+<br><br>
+<table align="center" class="table table-striped">
+    <tr>
+      <td><b style="font-size:16px">Nome do Visitante</b></td>
+      <td><b style="font-size:16px">RG do Visitante</b></td>
+      <td><b style="font-size:16px"></b></td>
+    </tr>
+
+    {% for itemCadastroVisitantes in listaCadastroVisitantes_itens%}
+    <tr>
+        <td>{{itemCadastroVisitantes.nomeVisitante}}</td>
+        <td>{{itemCadastroVisitantes.rgVisitante}}</td>
+        <td><a class="btn btn-primary btn-sm" type="button" href="/atualizaCadastroVisitantes/{{ itemCadastroVisitantes.id }}">Editar</a></td>
+
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

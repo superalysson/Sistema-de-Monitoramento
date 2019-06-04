@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block corpo %}
+<h1 class="h3 mb-0 text-gray-800"><strong>Atualiza Cadastro de  Visitante </strong></h1>
+<form method="post">
+  {% csrf_token %}
+  <div class="form-group">
+    <label class="col-md-2 control-label">Nome do Visitante:</label>
+  <div class="col-md-10">
+
+    {{form.nomeVisitante|add_class:"form-control"}}<br><br>
+  </div>
+
+  <div class="form-group">
+  <label class="col-md-2 control-label">RG do Visitante:</label>
+  <div class="col-md-10">
+  {{form.rgVisitante|add_class:"form-control"}}<br><br>
+  </div>
+  </div>
+
+
+  </div>
+
+  <a type="button" href="javascript:history.go(-1)" class="btn btn-warning" >Cancelar</a>
+  <a type="button" href="/excluiCadastroVisitantes/{{ itemCadastroVisitantes.id }}"  class="btn btn-danger" >Excluir</a>
+    
+   <button type="submit" class="btn btn-success" >Salvar</button>
+
+</form>
+
+{% endblock %}

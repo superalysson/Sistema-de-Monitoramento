@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block corpo %}
+<h1 class="h3 mb-0 text-gray-800"><strong>Lista dos Carros Cadastrados </strong></h1>
+<br><br>
+<table align="center" class="table table-striped">
+    <tr>
+      <td><b style="font-size:16px">Placa do Carro</b></td>
+      <td><b style="font-size:16px">Modelo do Carro</b></td>
+      <td><b style="font-size:16px">Cor do Carro</b></td>
+      <td><b style="font-size:16px"></b></td>
+    </tr>
+
+    {% for itemCadastroCarros in listaCadastroCarros_itens%}
+    <tr>
+        <td>{{itemCadastroCarros.placaCarro}}</td>
+        <td>{{itemCadastroCarros.modeloCarro}}</td>
+        <td>{{itemCadastroCarros.corCarro}}</td>
+        <td><a class="btn btn-primary btn-sm" type="button" href="/atualizaCadastroCarros/{{ itemCadastroCarros.id }}">Editar</a></td>
+
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block corpo %}
+<h1 class="h3 mb-0 text-gray-800"><strong>Lista dos Fornecedores Cadastrados </strong></h1>
+<br><br>
+<table align="center" class="table table-striped">
+    <tr>
+      <td><b style="font-size:16px">Nome do Fornecedor</b></td>
+      <td><b style="font-size:16px">RG do Fornecedor</b></td>
+      <td><b style="font-size:16px">CPF do Fornecedor</b></td>
+      <td><b style="font-size:16px">Descrição do Fornecedor</b></td>
+      <td><b style="font-size:16px"></b></td>
+    </tr>
+
+    {% for itemCadastroFornecedores in listaCadastroFornecedores_itens%}
+    <tr>
+        <td>{{itemCadastroFornecedores.nomeFornecedor}}</td>
+        <td>{{itemCadastroFornecedores.rgFornecedor}}</td>
+        <td>{{itemCadastroFornecedores.cpfFornecedor}}</td>
+        <td>{{itemCadastroFornecedores.descricaoFornecedor}}</td>
+        <td><a class="btn btn-primary btn-sm" type="button" href="/atualizaCadastroFornecedores/{{ itemCadastroFornecedores.id }}">Editar</a></td>
+
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

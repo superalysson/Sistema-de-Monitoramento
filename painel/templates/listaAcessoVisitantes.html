@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block corpo %}
+<h1 class="h3 mb-0 text-gray-800"><strong>Lista de Acesso dos Visitantes </strong></h1>
+<br><br>
+<table align="center" class="table table-striped">
+    <tr>
+      <td><b style="font-size:16px">Nome do Visitante</b></td>
+      <td><b style="font-size:16px">Data da Entrada</b></td>
+      <td><b style="font-size:16px">Horário da Entrada</b></td>
+      <td><b style="font-size:16px">Data da Saída</b></td>
+      <td><b style="font-size:16px">Horário da Saída</b></td>
+      <td><b style="font-size:16px"></b></td>
+    </tr>
+
+    {% for itemAcessoVisitantes in listaAcessoVisitantes_itens%}
+    <tr>
+        <td>{{itemAcessoVisitantes.nomeVisitante}}</td>
+        <td>{{itemAcessoVisitantes.dataEntrada}}</td>
+        <td>{{itemAcessoVisitantes.horaEntrada}}</td>
+        <td>{{itemAcessoVisitantes.dataSaida}}</td>
+        <td>{{itemAcessoVisitantes.horaSaida}}</td>
+
+
+
+        <td><a class="btn btn-primary btn-sm" type="button" href="/atualizaAcessoVisitantes/{{ itemAcessoVisitantes.id }}">Editar</a></td>
+
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

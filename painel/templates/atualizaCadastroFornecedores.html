@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block corpo %}
+<h1 class="h3 mb-0 text-gray-800"><strong>Atualiza Cadastro de  Fornecedores </strong></h1>
+<form method="post">
+  {% csrf_token %}
+  <div class="form-group">
+    <label >Nome do Fornecedor:</label>
+    {{ form.nomeFornecedor|add_class:"form-control" }}
+
+    </div>
+
+    <div class="form-group">
+    <label >RG do Fornecedor:</label>
+    {{ form.rgFornecedor|add_class:"form-control" }}
+
+    </div>
+
+    <div class="form-group">
+    <label >CPF do Fornecedor:</label>
+    {{ form.cpfFornecedor|add_class:"form-control" }}
+
+    </div>
+
+    <div class="form-group">
+    <label >Descrição do Fornecedor:</label>
+    {{ form.descricaoFornecedor|add_class:"form-control" }}
+
+    </div>
+
+  <a type="button" href="javascript:history.go(-1)" class="btn btn-warning" >Cancelar</a>
+  <a type="button" href="/excluiCadastroFornecedores/{{ itemCadastroFornecedores.id }}"  class="btn btn-danger" >Excluir</a>
+    
+   <button type="submit" class="btn btn-success" >Salvar</button>
+
+</form>
+
+{% endblock %}

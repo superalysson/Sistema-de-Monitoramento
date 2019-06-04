@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block corpo %}
+<h1 class="h3 mb-0 text-gray-800"><strong>Lista de Acesso dos Carros </strong></h1>
+<br><br>
+<table align="center" class="table table-striped">
+    <tr>
+      <td><b style="font-size:16px">Placa do Carro</b></td>
+      <td><b style="font-size:16px">Data da Entrada</b></td>
+      <td><b style="font-size:16px">Horário da Entrada</b></td>
+      <td><b style="font-size:16px">Data da Saída</b></td>
+      <td><b style="font-size:16px">Horário da Saída</b></td>
+      <td><b style="font-size:16px"></b></td>
+    </tr>
+
+    {% for itemAcessoCarros in listaAcessoCarros_itens%}
+    <tr>
+        <td>{{itemAcessoCarros.placaCarro}}</td>
+        <td>{{itemAcessoCarros.dataEntrada}}</td>
+        <td>{{itemAcessoCarros.horaEntrada}}</td>
+        <td>{{itemAcessoCarros.dataSaida}}</td>
+        <td>{{itemAcessoCarros.horaSaida}}</td>
+        <td><a class="btn btn-primary btn-sm" type="button" href="/atualizaAcessoCarros/{{ itemAcessoCarros.id }}">Editar</a></td>
+
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}
