@@ -5,8 +5,30 @@ from django.shortcuts import render
 
 
 
-def painel(request):
-    return render(request, "painel.html")
+class Profile(models.Model):
+    nomeProfile = models.CharField(max_length=100)
+    cpfProfile = models.CharField(max_length=20)
+    enderecoProfile = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nomeProfile
+
+class Conta(models.Model):
+    nomeLugar = models.CharField(max_length=100)
+    endereco = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nomeLugar
+
+class Escala(models.Model):
+    nomeLugar = models.ForeignKey(Conta, on_delete=models.CASCADE)
+    nomeProfile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    dias = models.CharField(max_length=100)
+    Horas = models.CharField(max_length=20)
+
+
+
+
 
 
 class CadastroVisitantes(models.Model):
@@ -45,8 +67,8 @@ class AcessoMorador(models.Model):
     nomeMorador = models.ForeignKey(CadastroMorador, on_delete=models.CASCADE)
     dataEntrada = models.DateField()
     horaEntrada = models.TimeField()
-    dataSaida = models.DateField()
-    horaSaida = models.TimeField()
+    dataSaida = models.DateField(null=True, blank=True)
+    horaSaida = models.TimeField(null=True, blank=True)
 
     def __str__(self):
         return self.nomeMorador , self.dataEntrada
@@ -55,8 +77,8 @@ class AcessoVisitante(models.Model):
     nomeVisitante = models.ForeignKey(CadastroVisitantes, on_delete=models.CASCADE)
     dataEntrada = models.DateField()
     horaEntrada = models.TimeField()
-    dataSaida = models.DateField()
-    horaSaida = models.TimeField()
+    dataSaida = models.DateField(null=True, blank=True)
+    horaSaida = models.TimeField(null=True, blank=True)
 
     def __str__(self):
         return self. nomeVisitante, self.dataEntrada
@@ -65,8 +87,8 @@ class AcessoCarro(models.Model):
     placaCarro = models.ForeignKey(CadastroCarros, on_delete=models.CASCADE)
     dataEntrada = models.DateField()
     horaEntrada = models.TimeField()
-    dataSaida = models.DateField()
-    horaSaida = models.TimeField()
+    dataSaida = models.DateField(null=True, blank=True)
+    horaSaida = models.TimeField(null=True, blank=True)
 
     def __str__(self):
         return self.placaCarro, self.dataEntrada
@@ -75,8 +97,8 @@ class AcessoFornecedor(models.Model):
     nomeFornecedor = models.ForeignKey(CadastroFornecedores, on_delete=models.CASCADE)
     dataEntrada = models.DateField()
     horaEntrada = models.TimeField()
-    dataSaida = models.DateField()
-    horaSaida = models.TimeField()
+    dataSaida = models.DateField(null=True, blank=True)
+    horaSaida = models.TimeField(null=True, blank=True)
 
     def __str__(self):
         return self.nomeFornecedor, self.dataEntrada

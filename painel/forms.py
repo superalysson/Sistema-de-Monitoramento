@@ -9,6 +9,26 @@ from painel.models import AcessoMorador
 from painel.models import AcessoVisitante
 from painel.models import Diario
 from painel.models import Mensagem
+from painel.models import Profile
+from painel.models import Conta
+from painel.models import Escala
+
+
+
+class EscalaForm(forms.ModelForm):
+    class Meta:
+        model = Escala
+        fields = ('nomeLugar','nomeProfile','dias','Horas')
+
+class ContaForm(forms.ModelForm):
+    class Meta:
+        model = Conta
+        fields = ('nomeLugar','endereco')
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('nomeProfile', 'cpfProfile', 'enderecoProfile')
 
 class CadastroVisitanteForm(forms.ModelForm):
     class Meta:

@@ -19,15 +19,34 @@ from painel.models import Diario
 from painel.models import Mensagem
 from painel.forms import DiarioForm
 from painel.forms import MensagemForm
+from painel.forms import ProfileForm
+from painel.models import Profile
+from painel.models import Conta
+from painel.models import Escala
+from painel.forms import ContaForm
+from painel.forms import EscalaForm
+
+from django.contrib.auth.decorators import login_required
 
 
 
+def profile(request):
+    return render(request, "profile.html")
 
+def index(request):
+    return render(request, "index.html")
+
+@login_required
 def painel(request):
     return render(request, "painel.html")
 
+
 def login(request):
     return render(request, "login.html")
+
+
+def logout(request):
+    return render(request, "logout.html")
 
 def verVisitante(request):
     return render(request, "verVisitante.html")
@@ -43,6 +62,48 @@ def verCarros(request):
 
 def suporte(request):
     return render(request, "suporte.html")
+
+@login_required
+def adicionaEscala(request):
+    if request.method == "POST": # Formulário enviado
+        form = EscalaForm(request.POST)
+        if form.is_valid(): # Formulário válido
+            form.save() # Salva o formulário
+
+            # Mensagem de formulário cadastrado
+            return render(request, "salvo.html", {})
+    else: # Página acessada via link (método GET)
+        # Exibe o formulário em branco
+        form = EscalaForm()
+    return render(request, "adicionaEscala.html", {'form': form})
+
+
+def adicionaConta(request):
+    if request.method == "POST": # Formulário enviado
+        form = ContaForm(request.POST)
+        if form.is_valid(): # Formulário válido
+            form.save() # Salva o formulário
+
+            # Mensagem de formulário cadastrado
+            return render(request, "salvo.html", {})
+    else: # Página acessada via link (método GET)
+        # Exibe o formulário em branco
+        form = ContaForm()
+    return render(request, "adicionaConta.html", {'form': form})
+
+
+def adicionaProfile(request):
+    if request.method == "POST": # Formulário enviado
+        form = ProfileForm(request.POST)
+        if form.is_valid(): # Formulário válido
+            form.save() # Salva o formulário
+
+            # Mensagem de formulário cadastrado
+            return render(request, "salvo.html", {})
+    else: # Página acessada via link (método GET)
+        # Exibe o formulário em branco
+        form = ProfileForm()
+    return render(request, "adicionaProfile.html", {'form': form})
 
 def adicionaMensagem(request):
     if request.method == "POST": # Formulário enviado
@@ -218,6 +279,42 @@ def listaAcessoMoradores(request):
     listaAcessoMoradores_itens = AcessoMorador.objects.all()
     return render(request, "listaAcessoMoradores.html", {'listaAcessoMoradores_itens': listaAcessoMoradores_itens})
 
+def listaProfile(request):
+    listaProfile_itens = Profile.objects.all()
+    return render(request, "listaProfile.html", {'listaProfile_itens': listaProfile_itens})
+
+def listaConta(request):
+    listaConta_itens = Conta.objects.all()
+    return render(request, "listaConta.html", {'listaConta_itens': listaConta_itens})
+
+def listaEscala(request):
+    listaEscala_itens = Escala.objects.all()
+    return render(request, "listaEscala.html", {'listaEscala_itens': listaEscala_itens})
+
+def atualizaProfile(request, nr_item):
+    itemProfile = get_object_or_404(Profile, pk=nr_item)
+    form = ProfileForm(request.POST or None, instance=itemProfile)
+    if form.is_valid():
+        form.save()
+        return redirect('/painel/')
+    return render(request, "atualizaProfile.html", {'itemProfile': itemProfile, 'form': form})
+
+def atualizaConta(request, nr_item):
+    itemConta = get_object_or_404(Conta, pk=nr_item)
+    form = ContaForm(request.POST or None, instance=itemConta)
+    if form.is_valid():
+        form.save()
+        return redirect('/painel/')
+    return render(request, "atualizaConta.html", {'itemConta': itemConta, 'form': form})
+
+def atualizaEscala(request, nr_item):
+    itemEscala = get_object_or_404(Escala, pk=nr_item)
+    form = EscalaForm(request.POST or None, instance=itemEscala)
+    if form.is_valid():
+        form.save()
+        return redirect('/painel/')
+    return render(request, "atualizaEscala.html", {'itemEscala': itemEscala, 'form': form})
+
 def atualizaDiario(request, nr_item):
     itemDiario = get_object_or_404(Diario, pk=nr_item)
     form = DiarioForm(request.POST or None, instance=itemDiario)
@@ -299,6 +396,33 @@ def atualizaAcessoFornecedores(request, nr_item):
         form.save()
         return redirect('/painel/')
     return render(request, "atualizaAcessoFornecedores.html", {'itemAcessoFornecedores': itemAcessoFornecedores, 'form': form})
+
+def excluiEscala(request, nr_item):
+    print(nr_item)
+    itemEscala = get_object_or_404(Escala, pk=nr_item)
+    if request.method == 'POST':
+        print(nr_item)
+        itemEscala.delete()
+        return redirect('/painel/')
+    return render(request, "excluiEscala.html", {'itemEscala': itemEscala})
+
+def excluiConta(request, nr_item):
+    print(nr_item)
+    itemConta = get_object_or_404(Conta, pk=nr_item)
+    if request.method == 'POST':
+        print(nr_item)
+        itemConta.delete()
+        return redirect('/painel/')
+    return render(request, "excluiConta.html", {'itemConta': itemConta})
+
+def excluiProfile(request, nr_item):
+    print(nr_item)
+    itemProfile = get_object_or_404(Profile, pk=nr_item)
+    if request.method == 'POST':
+        print(nr_item)
+        itemProfile.delete()
+        return redirect('/painel/')
+    return render(request, "excluiProfile.html", {'itemProfile': itemProfile})
 
 def excluiDiario(request, nr_item):
     print(nr_item)
