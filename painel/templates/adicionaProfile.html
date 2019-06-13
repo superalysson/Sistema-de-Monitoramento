@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block corpo %}
+<h1 class="h3 mb-0 text-gray-800"><strong>Adiciona Cadastro de Funcionário </strong></h1>
+<form action="" method="post">
+  {% csrf_token %}
+   <div class="form-group">
+    <label >Nome do Funcionário:</label>
+    {{ form.nomeProfile|add_class:"form-control" }}
+
+    </div>
+
+
+    <div class="form-group">
+    <label >CPF do Funcionário:</label>
+    {{ form.cpfProfile|add_class:"form-control" }}
+
+    </div>
+
+    <div class="form-group">
+    <label >Endereço do Funcionário:</label>
+    {{ form.enderecoProfile|add_class:"form-control" }}
+
+    </div>
+
+  <a href="javascript:history.go(-1)" class="btn btn-danger">Cancelar</a>
+    <button type="reset"  class="btn btn-primary">Limpar</button>
+  <button type="submit" class="btn btn-success">Adicionar</button>
+</form>
+{% endblock %}

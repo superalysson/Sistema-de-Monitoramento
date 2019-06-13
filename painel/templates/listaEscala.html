@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block corpo %}
+<h1 class="h3 mb-0 text-gray-800"><strong>Lista de Escala de Funcionários </strong></h1>
+<br><br>
+<table align="center" class="table table-striped">
+    <tr>
+      <td><b style="font-size:16px">Nome da Conta</b></td>
+      <td><b style="font-size:16px">Nome do Funcionário</b></td>
+      <td><b style="font-size:16px">Dias de Trabalho</b></td>
+      <td><b style="font-size:16px">Horas de Trabalho por Dia</b></td>
+      <td><b style="font-size:16px"></b></td>
+    </tr>
+
+    {% for itemEscala in listaEscala_itens%}
+    <tr>
+        <td>{{itemEscala.nomeLugar}}</td>
+        <td>{{itemEscala.nomeProfile}}</td>
+        <td>{{itemEscala.dias}}</td>
+        <td>{{itemEscala.Horas}}</td>
+        <td><a class="btn btn-primary btn-sm" type="button" href="/atualizaEscala/{{ itemEscala.id }}">Editar</a></td>
+
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

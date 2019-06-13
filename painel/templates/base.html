@@ -4,6 +4,8 @@
 
 <head>
 
+
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -34,7 +36,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/painel/">
         <div class="sidebar-brand-icon " title="SEG Sistemas">
           <i class="fas fa-shield-alt"></i>
         </div>
@@ -129,6 +131,7 @@
       <!-- Divider -->
       <hr class="sidebar-divider">
 
+      {% if user.is_staff == True %}
       <!-- Heading -->
       <div class="sidebar-heading">
         Painel Admin
@@ -143,19 +146,19 @@
         <div id="collapseConfiguracoes" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Cadastro de:</h6>
-            <a class="collapse-item" href="#">Contas</a>
-            <a class="collapse-item" href="#">Colaboradores</a>
-            <a class="collapse-item" href="#">Escala</a>
+            <a class="collapse-item" href="/adicionaConta/">Contas</a>
+            <a class="collapse-item" href="/adicionaProfile/">Colaboradores</a>
+            <a class="collapse-item" href="/adicionaEscala/ ">Escala</a>
             <div class="collapse-divider"></div>
             <h6 class="collapse-header">Visualização de:</h6>
-            <a class="collapse-item" href="#">Contas</a>
-            <a class="collapse-item" href="#">Colaboradores</a>
-			<a class="collapse-item" href="#">Escala</a>
-			<div class="collapse-divider"></div>
+            <a class="collapse-item" href="/listaConta/">Contas</a>
+            <a class="collapse-item" href="/listaProfile/">Colaboradores</a>
+			<a class="collapse-item" href="/listaEscala/">Escala</a>
+			<!--<div class="collapse-divider"></div>
             <h6 class="collapse-header">Alteração de:</h6>
-            <a class="collapse-item" href="#">Contas</a>
-            <a class="collapse-item" href="#">Colaboradores</a>
-			<a class="collapse-item" href="#">Escala</a>
+            <a class="collapse-item" href="/atualizaConta/">Contas</a>
+            <a class="collapse-item" href="/atualizaProfile/">Colaboradores</a>
+			<a class="collapse-item" href="/atualizaEscala/">Escala</a>-->
           </div>
         </div>
       </li>
@@ -203,6 +206,7 @@
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
+      {% endif %}
 
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
@@ -371,13 +375,20 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                  {% if user.is_authenticated %}
+                   Olá, {{ user.first_name }}!
+                  {% else %}
+                 <p>Você não está logado no sistema</p>
+                  <a href="{% url 'login' %}">login</a>
+                  {% endif %}
+                  </span>
 				<i class="fas fa-user"></i>
                 <!--<img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">-->
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="/profile/">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
                 </a>
@@ -390,9 +401,9 @@
                   Activity Log
                 </a>-->
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="{% url 'logout' %}" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
+                  Sair
                 </a>
               </div>
             </li>
@@ -447,19 +458,20 @@
   </a>
 
   <!-- Logout Modal-->
+
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-body">Selecione "Sair" para do sistema</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
+          <a class="btn btn-primary" href="{% url 'logout' %}">Sair</a>
         </div>
       </div>
     </div>
